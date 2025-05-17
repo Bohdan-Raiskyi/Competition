@@ -1,3 +1,4 @@
+using CompetitionDomain.Model;
 using CompetitionInfrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,5 @@ app.MapControllerRoute(
     pattern: "{controller=Competitions}/{action=Index}/{id?}")
     //pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

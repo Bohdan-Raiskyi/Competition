@@ -26,9 +26,17 @@ public partial class SwimmingCompetitionDbContext : DbContext
 
     public virtual DbSet<Swimmer> Swimmers { get; set; }
 
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Server=Bogdans_PC\\SQLEXPRESS; Database=SwimmingCompetitionDB; Trusted_Connection=True; TrustServerCertificate=True; ");
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=Bogdans_PC\\SQLEXPRESS; Database=SwimmingCompetitionDB; Trusted_Connection=True; TrustServerCertificate=True; ");
+    {
+        optionsBuilder
+            .UseSqlServer("Server=Bogdans_PC\\SQLEXPRESS; Database=SwimmingCompetitionDB; Trusted_Connection=True; TrustServerCertificate=True; ")
+            .LogTo(Console.WriteLine, LogLevel.Information) // Виводить запити у консоль
+            .EnableSensitiveDataLogging(); // Показує значення параметрів
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -89,6 +97,7 @@ public partial class SwimmingCompetitionDbContext : DbContext
 
         modelBuilder.Entity<Swim>(entity =>
         {
+
             entity.HasKey(e => e.Id).HasName("PK__Swim__3213E83F3C8E0F44");
 
             entity.ToTable("Swim");
