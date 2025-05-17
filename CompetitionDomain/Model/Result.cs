@@ -15,9 +15,11 @@ public partial class Result
     public int SwimmerId { get; set; }
 
     [Display(Name = "Час фінішу")]
+    [DisplayFormat(DataFormatString = "{0:HH:mm:ss.ff}", ApplyFormatInEditMode = true)]
     public TimeOnly? ArrivalTime { get; set; }
 
     [Display(Name = "Загальний час")]
+    [DisplayFormat(DataFormatString = "{0:HH:mm:ss.ff}", ApplyFormatInEditMode = true)]
     public TimeOnly? ResultTime { get; set; }
 
     [Display(Name = "Призове місце")]

@@ -1,13 +1,13 @@
 ﻿@model CompetitionDomain.Model.Distance
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Деталі";
 }
 
-<h1>Details</h1>
+<h2>Деталі</h2>
 
 <div>
-    <h4>Distance</h4>
+    <h4>Дистанція</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -25,6 +25,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Деталі</a> |
+    <a asp-action="Index">Повернутися до списку</a>
 </div>

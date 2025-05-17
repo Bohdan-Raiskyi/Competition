@@ -18,6 +18,7 @@ public partial class Swim
     public int SwimNumber { get; set; }
 
     [Display(Name = "Час старту")]
+    [DisplayFormat(DataFormatString = "{0:HH:mm:ss.ff}", ApplyFormatInEditMode = true)]
     public TimeOnly? StartTime { get; set; }
 
     [Display(Name = "Змагання")]
