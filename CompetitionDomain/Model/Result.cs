@@ -23,6 +23,7 @@ public partial class Result
     public TimeOnly? ResultTime { get; set; }
 
     [Display(Name = "Призове місце")]
+    [Range(1, int.MaxValue, ErrorMessage = "Призове місце - 1, 2 або 3")]
     public int? Place { get; set; }
 
     [Display(Name = "Заплив")]

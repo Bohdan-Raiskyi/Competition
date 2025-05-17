@@ -50,7 +50,7 @@ namespace CompetitionInfrastructure.Controllers
         public IActionResult Create()
         {
             ViewData["SwimId"] = new SelectList(_context.Swims, "Id", "SwimNumber");
-            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "AgeCategory");
+            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "Name");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace CompetitionInfrastructure.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SwimId"] = new SelectList(_context.Swims, "Id", "SwimNumber", result.SwimId);
-            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "AgeCategory", result.SwimmerId);
+            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "Name", result.SwimmerId);
             return View(result);
         }
 
@@ -86,7 +86,7 @@ namespace CompetitionInfrastructure.Controllers
                 return NotFound();
             }
             ViewData["SwimId"] = new SelectList(_context.Swims, "Id", "SwimNumber", result.SwimId);
-            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "AgeCategory", result.SwimmerId);
+            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "Name", result.SwimmerId);
             return View(result);
         }
 
@@ -123,7 +123,7 @@ namespace CompetitionInfrastructure.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SwimId"] = new SelectList(_context.Swims, "Id", "SwimNumber", result.SwimId);
-            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "AgeCategory", result.SwimmerId);
+            ViewData["SwimmerId"] = new SelectList(_context.Swimmers, "Id", "Name", result.SwimmerId);
             return View(result);
         }
 

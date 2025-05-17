@@ -56,6 +56,19 @@ namespace CompetitionInfrastructure.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,TeamName,AgeCategory")] Swimmer swimmer)
         {
+            // Перевірка діапазону років (якщо вказано)
+            if (swimmer.AgeCategory.Contains("-"))
+            {
+                var years = swimmer.AgeCategory.Split('-');
+                if (years.Length != 2 ||
+                    !int.TryParse(years[0], out int startYear) ||
+                    !int.TryParse(years[1], out int endYear) ||
+                    startYear >= endYear)
+                {
+                    ModelState.AddModelError("AgeCategory", "Невірний діапазон років (наприклад, 1990-1991).");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(swimmer);
@@ -91,6 +104,19 @@ namespace CompetitionInfrastructure.Controllers
             if (id != swimmer.Id)
             {
                 return NotFound();
+            }
+
+            // Перевірка діапазону років (якщо вказано)
+            if (swimmer.AgeCategory.Contains("-"))
+            {
+                var years = swimmer.AgeCategory.Split('-');
+                if (years.Length != 2 ||
+                    !int.TryParse(years[0], out int startYear) ||
+                    !int.TryParse(years[1], out int endYear) ||
+                    startYear >= endYear)
+                {
+                    ModelState.AddModelError("AgeCategory", "Невірний діапазон років (наприклад, 1990-1991).");
+                }
             }
 
             if (ModelState.IsValid)

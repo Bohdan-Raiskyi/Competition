@@ -61,6 +61,12 @@ namespace CompetitionInfrastructure.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DistanceId,CompetitionId,SwimNumber,StartTime")] Swim swim)
         {
+            // Перевірка унікальності SwimNumber в межах CompetitionId
+            if (_context.Swims.Any(s => s.CompetitionId == swim.CompetitionId && s.SwimNumber == swim.SwimNumber))
+            {
+                ModelState.AddModelError("SwimNumber", "Номер запливу для даного змагання вже існує.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(swim);
@@ -100,6 +106,14 @@ namespace CompetitionInfrastructure.Controllers
             if (id != swim.Id)
             {
                 return NotFound();
+            }
+
+            // Перевірка унікальності SwimNumber в межах CompetitionId (виключаючи поточний запис)
+            if (_context.Swims.Any(s => s.CompetitionId == swim.CompetitionId
+                                     && s.SwimNumber == swim.SwimNumber
+                                     && s.Id != swim.Id))
+            {
+                ModelState.AddModelError("SwimNumber", "Номер запливу для даного змагання вже існує.");
             }
 
             if (ModelState.IsValid)

@@ -15,6 +15,8 @@ public partial class Swim
     public int CompetitionId { get; set; }
 
     [Display(Name = "Номер запливу")]
+    [Required(ErrorMessage = "Поле 'Номер запливу' є обов'язковим.")]
+    [Range(1, int.MaxValue, ErrorMessage = "'Номер запливу' - натуральне число")]
     public int SwimNumber { get; set; }
 
     [Display(Name = "Час старту")]
