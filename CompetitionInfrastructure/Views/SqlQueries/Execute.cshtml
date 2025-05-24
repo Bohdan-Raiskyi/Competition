@@ -1,0 +1,23 @@
+﻿@model CompetitionDomain.Model.SqlQuery
+
+@{
+    ViewData["Title"] = "Виконати запит";
+}
+
+<h2>@Model.Name</h2>
+<h4>Введіть параметри:</h4>
+
+<form asp-action="Execute">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    @foreach (var param in ViewBag.Parameters)
+    {
+        <div class="form-group">
+            <label>@param</label>
+            <input type="text" name="parameters[@param]" class="form-control" required />
+        </div>
+    }
+    <br />
+    <button type="submit" class="btn btn-primary">Виконати</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

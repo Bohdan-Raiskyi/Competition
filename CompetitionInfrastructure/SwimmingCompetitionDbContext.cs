@@ -26,9 +26,12 @@ public partial class SwimmingCompetitionDbContext : DbContext
 
     public virtual DbSet<Swimmer> Swimmers { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=Bogdans_PC\\SQLEXPRESS; Database=SwimmingCompetitionDB; Trusted_Connection=True; TrustServerCertificate=True; ");
+    public virtual DbSet<SqlQuery> SqlQuery { get; set; }
+
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Server=Bogdans_PC\\SQLEXPRESS; Database=SwimmingCompetitionDB; Trusted_Connection=True; TrustServerCertificate=True; ");
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -137,6 +140,19 @@ public partial class SwimmingCompetitionDbContext : DbContext
             entity.Property(e => e.TeamName)
                 .HasMaxLength(100)
                 .HasColumnName("team_name");
+        });
+
+        // Налаштування для SqlQuery
+        modelBuilder.Entity<SqlQuery>(entity =>
+        {
+            entity.ToTable("SqlQuery");
+
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsRequired();
+            entity.Property(e => e.QueryText)
+                .IsRequired();
         });
 
         OnModelCreatingPartial(modelBuilder);
